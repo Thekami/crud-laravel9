@@ -20,12 +20,17 @@
         @foreach ($tareas as $tarea)
             <tr>
                 <td>{{ $tarea->nombre }}</td>
-                <td>{{ $tarea->finalizada }}</td>
-                <td>{{ $tarea->fecha_limite }}</td>
-                <td>{{ $tarea->urgencia }}</td>
+                <td>{{ $tarea->finalizado() }}</td>
+                <td>{{ $tarea->fecha_limite->format('d/m/Y H:i:s') }}</td>
+                <td>{{ $tarea->urgencia() }}</td>
                 <td>{{ $tarea->descripcion }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary">Ver</button>
+                    <a href="{{ route('tarea.edit', $tarea->id) }}" class="btn btn-sm btn-success ">
+                        <span class="fa fa-pencil"></span> Editar
+                    </a>
+                    <a href="{{ route('tarea.show', $tarea->id) }}" class="btn btn-sm btn-primary">
+                        <span class="fa fa-eye"></span> Ver
+                    </a>
                 </td>
             </tr>
         @endforeach

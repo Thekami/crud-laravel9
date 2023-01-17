@@ -20,12 +20,24 @@ class Tarea extends Model
     protected $dates = ['fecha_limite'];
 
     /*
-    Si no queremos usar las columnas por defecto uppdate_at y create_at de Laravel
-    Hay que pooner esta linea 
+        Si no queremos usar las columnas por defecto uppdate_at y create_at de Laravel
+        Hay que pooner esta linea 
 
-    protected $timestamps = false;
-    
-    y comentar $table->timestamps(); de el archivo de migración de la tabla.
+        protected $timestamps = false;
+        
+        y comentar $table->timestamps(); de el archivo de migración de la tabla.
     */
+
+    public const URGENCIAS = ['Baja', 'Normal', 'Alta'];
+
+    // Método para convertir de numero a texto el valor del campo urgencia
+    public function urgencia(){
+        return  self::URGENCIAS[$this->urgencia];
+    }
+    
+    // Método para convertir de numero a texto el valor del campo finalizado
+    public function finalizado(){
+      return $this->finalizado == '1' ? 'Si' : 'No';
+    }
     
 }

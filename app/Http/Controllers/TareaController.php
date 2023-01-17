@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarea;
 use Illuminate\Http\Request;
+use App\Http\Requests\TareaRequest;
 
 class TareaController extends Controller
 {
@@ -13,9 +14,21 @@ class TareaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        // Hace una consulta a la tabla tareas usando el modelo Tarea
+        // Aquí se puede usar todas las opciones del querybuilder de laravel para filtrar los datos.
         $tareas = Tarea::orderByDesc('id')->get();
+
+        // compact() permite retornar lo resultante de la consulta
         return view('tarea.index', compact('tareas'));
+        
+        /* 
+            También se puede usar esta estructura para retornar los datos si es que no queremos usar compact()
+
+            $params = ['tareas' => $tareas];
+            return view('tarea.index', $params);
+        */
+        
     }
 
     /**
@@ -34,18 +47,14 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TareaRequest $request)
     {
-        //dd($request);
-        $datos = $request->validate([
-            'nombre'        => 'required|max:60',
-            'descripcion'   => 'nullable|max:255',
-            'finalizada'    => 'nullable|numeric|min:0|max:1',
-            'urgencia'      => 'required|numeric|min:0|max:2',
-            'fecha_limite'  => 'required|date_format:Y-m-d\TH:i'
-        ]);
+
+        // Permite validar los campos que se recibirán
+        $datos = $request->validated();
+
         $tarea = Tarea::create($datos);
-        return redirect('/')->route('tarea.index');
+        return redirect()->route('tarea.index');
     }
 
     /**
@@ -56,7 +65,8 @@ class TareaController extends Controller
      */
     public function show(Tarea $tarea)
     {
-        //
+        $params = ['tarea' => $tarea];
+        return view('tarea.show', $params);
     }
 
     /**
@@ -67,7 +77,8 @@ class TareaController extends Controller
      */
     public function edit(Tarea $tarea)
     {
-        //
+        // dd($tarea);
+        return view('tarea.edit', compact('tarea'));
     }
 
     /**
@@ -77,9 +88,13 @@ class TareaController extends Controller
      * @param  \App\Models\Tarea  $tarea
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(TareaRequest $request, Tarea $tarea)
     {
-        //
+        // Permite validar los campos que se recibirán
+        $datos = $request->validated();
+        // dd($request);
+        $tarea->update($datos);
+        return redirect()->route('tarea.index');
     }
 
     /**
