@@ -26,3 +26,5 @@ Route::get('tarea/{tarea}/editar', [TareaController::class, 'edit'])->name('tare
 Route::put('tarea/{tarea}/actualizar', [TareaController::class, 'update'])->name('tarea.update');
 Route::get('tarea/{tarea}/ver', [TareaController::class, 'show'])->name('tarea.show');
 Route::get('tarea/{tarea}/eliminar', [TareaController::class, 'destroy'])->name('tarea.destroy');
+
+// Route::resource('tarea', TareaController::class);

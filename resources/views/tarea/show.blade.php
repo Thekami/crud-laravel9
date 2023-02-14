@@ -15,7 +15,7 @@
 
     
     <form method="delete" action="{{ route('tarea.destroy', $tarea->id) }}">
-        {{-- <a href="{{ route('tarea.edit', $tarea->id) }}" class="btn btn-sm btn-success"> <span class="fa fa-pencil"></span> Modificar</a> --}}
+         <a href="{{ route('tarea.edit', $tarea->id) }}" class="btn btn-sm btn-success"> <span class="fa fa-pencil"></span> Modificar</a>
     
         <button type="submit" class="btn btn-sm btn-danger">
             <span class="fa fa-destroy"></span> Eliminar

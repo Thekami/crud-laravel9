@@ -17,10 +17,10 @@ class TareaController extends Controller
     {   
         // Hace una consulta a la tabla tareas usando el modelo Tarea
         // Aquí se puede usar todas las opciones del querybuilder de laravel para filtrar los datos.
-        $tareas = Tarea::orderByDesc('id')->get();
+        //$tareas = Tarea::orderByDesc('id')->get();
 
         // compact() permite retornar lo resultante de la consulta
-        return view('tarea.index', compact('tareas'));
+        //return view('tarea.index', compact('tareas'));
         
         /* 
             También se puede usar esta estructura para retornar los datos si es que no queremos usar compact()
@@ -28,6 +28,9 @@ class TareaController extends Controller
             $params = ['tareas' => $tareas];
             return view('tarea.index', $params);
         */
+
+        // Comenté lo anterior para usar Livewire aquí
+        return view('tarea.index');
         
     }
 
