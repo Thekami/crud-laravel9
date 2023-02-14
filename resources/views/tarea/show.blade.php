@@ -13,7 +13,14 @@
     </ul>
     <p>{{ $tarea->descripcion; }}</p>
 
-    <a href="" class="btn btn-sm btn-success"> <span class="fa fa-pencil"></span> Modificar</a>
-    <a href="" class="btn btn-sm btn-danger"> <span class="fa fa-destroy"></span> Eliminar</a>
+    
+    <form method="delete" action="{{ route('tarea.destroy', $tarea->id) }}">
+        {{-- <a href="{{ route('tarea.edit', $tarea->id) }}" class="btn btn-sm btn-success"> <span class="fa fa-pencil"></span> Modificar</a> --}}
+    
+        <button type="submit" class="btn btn-sm btn-danger">
+            <span class="fa fa-destroy"></span> Eliminar
+        </button>
+    </form>
+    {{-- <a href="" class="btn btn-sm btn-danger"> <span class="fa fa-destroy"></span> Eliminar</a> --}}
     
 @endsection
